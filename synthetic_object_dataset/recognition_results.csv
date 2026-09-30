@@ -1,0 +1,13 @@
+file,color,shape,size,label,mode,confidence,contours
+black_rectangle_medium.png,black,rectangle,medium,Black Rectangle,exact,1.0,1
+blue_box_medium.png,blue,square,medium,Blue Box,exact,1.0,1
+cyan_hexagon_tiny.png,cyan,hexagon,tiny,Cyan Hexagon,exact,1.0,1
+gray_triangle_medium.png,gray,triangle,medium,Gray Triangle,exact,1.0,1
+green_triangle_small.png,green,triangle,small,Green Triangle,exact,1.0,1
+orange_ball_medium.png,orange,circle,medium,Orange Ball,exact,1.0,1
+pink_oval_medium.png,pink,oval,medium,no match,none,0.2,1
+purple_box_small.png,purple,square,small,Purple Box,exact,1.0,1
+red_ball_small.png,red,circle,small,Red Ball,exact,1.0,1
+red_rectangle_small.png,red,rectangle,small,Red Rectangle,exact,1.0,1
+white_circle_large.png,white,circle,large,White Circle,exact,1.0,1
+yellow_rectangle_large.png,yellow,rectangle,large,Yellow Rectangle,exact,1.0,1

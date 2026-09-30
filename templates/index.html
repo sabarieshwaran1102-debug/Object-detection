@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classical AI | Knowledge-Based Object Appearance Recognition Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header Navbar -->
+    <header class="navbar">
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-brain-circuit"></i>
+        </div>
+        <div class="brand-text">
+          <h1>Classical AI Recognition Engine</h1>
+          <span class="subtext">Symbolic Production Rules & Knowledge-Based Appearance Perception</span>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge badge-tech"><i class="fa-solid fa-microchip"></i> Classical AI (No ML)</span>
+        <span class="badge badge-status" id="kb-count-badge"><i class="fa-solid fa-book-bookmark"></i> KB: 13 Rules</span>
+      </div>
+    </header>
+
+    <!-- Main Navigation Bar -->
+    <nav class="main-nav">
+      <button class="nav-tab active" data-tab="pipeline">
+        <i class="fa-solid fa-eye"></i> Visual Perception Pipeline
+      </button>
+      <button class="nav-tab" data-tab="batch">
+        <i class="fa-solid fa-folder-tree"></i> Batch Dataset Processing
+      </button>
+      <button class="nav-tab" data-tab="knowledge">
+        <i class="fa-solid fa-database"></i> Knowledge Base & Rules
+      </button>
+      <button class="nav-tab" data-tab="synthetic">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Synthetic Studio
+      </button>
+      <button class="nav-tab" data-tab="webcam">
+        <i class="fa-solid fa-camera"></i> Live Webcam
+      </button>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="content">
+      
+      <!-- TAB 1: VISUAL PERCEPTION PIPELINE -->
+      <section id="tab-pipeline" class="tab-page active">
+        <div class="grid-layout">
+          
+          <!-- Control Panel Sidebar -->
+          <div class="card control-card">
+            <h3><i class="fa-solid fa-sliders"></i> Image Acquisition</h3>
+            
+            <div class="input-mode-selector">
+              <button class="mode-btn active" data-mode="preset"><i class="fa-solid fa-images"></i> Sample Dataset</button>
+              <button class="mode-btn" data-mode="upload"><i class="fa-solid fa-cloud-arrow-up"></i> Upload File</button>
+            </div>
+
+            <!-- Preset Dropdown -->
+            <div id="preset-controls" class="control-group">
+              <label><i class="fa-solid fa-list-check"></i> Select Dataset Sample:</label>
+              <select id="preset-dataset-select" class="form-select">
+                <option value="synthetic">Synthetic Dataset (Default 12 Objects)</option>
+                <option value="acquisition">Acquisition Dataset (36 Objects)</option>
+                <option value="unknown">Unknown Dataset (Test Unknowns)</option>
+              </select>
+              <label class="mt-2"><i class="fa-solid fa-image"></i> Select Image File:</label>
+              <select id="preset-image-select" class="form-select">
+                <option value="">Loading samples...</option>
+              </select>
+            </div>
+
+            <!-- Upload Controls -->
+            <div id="upload-controls" class="control-group hidden">
+              <label><i class="fa-solid fa-file-image"></i> Choose Image File:</label>
+              <input type="file" id="file-input" accept="image/*" class="form-control">
+              <div id="drop-zone" class="drop-zone">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <p>Drag & drop image here or click to select</p>
+              </div>
+            </div>
+
+            <button id="btn-run-analysis" class="btn btn-primary full-width mt-3">
+              <i class="fa-solid fa-play"></i> Run Classical AI Perception
+            </button>
+
+            <!-- Quick Image Preview -->
+            <div class="preview-box mt-3">
+              <label><i class="fa-solid fa-image"></i> Input Preview</label>
+              <img id="input-preview-img" src="/static/placeholder.png" alt="Preview">
+            </div>
+          </div>
+
+          <!-- Main Results & Pipeline Stage Viewer -->
+          <div class="results-container">
+            
+            <!-- Pipeline Visual Stages -->
+            <div class="card stage-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-diagram-project"></i> Perception Pipeline (6 Stages)</h3>
+                <span id="otsu-val-badge" class="badge badge-info">Otsu Threshold: N/A</span>
+              </div>
+              
+              <div class="stage-nav">
+                <button class="stage-tab active" data-stage="stage_1_original">1. Input</button>
+                <button class="stage-tab" data-stage="stage_2_grayscale">2. Grayscale</button>
+                <button class="stage-tab" data-stage="stage_3_blurred">3. Gaussian Blur</button>
+                <button class="stage-tab" data-stage="stage_4_otsu_threshold">4. Otsu Threshold</button>
+                <button class="stage-tab" data-stage="stage_5_morphological">5. Morphological</button>
+                <button class="stage-tab" data-stage="stage_6_detected_contours">6. Contours & Bounds</button>
+              </div>
+
+              <div class="stage-viewer">
+                <img id="stage-display-img" src="/static/placeholder.png" alt="Stage Output">
+                <div class="stage-caption" id="stage-caption-text">
+                  Stage 1: Raw Input Perception
+                </div>
+              </div>
+            </div>
+
+            <!-- Object Facts & Symbolic Reasoning Panel -->
+            <div class="card reasoning-card mt-3">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-brain"></i> Symbolic Fact Representation & Reasoning</h3>
+                <div id="detected-objects-picker" class="object-picker hidden">
+                  <span>Detected Objects:</span>
+                  <div id="object-pills" class="pill-group"></div>
+                </div>
+              </div>
+
+              <div id="no-analysis-msg" class="empty-state">
+                <i class="fa-solid fa-microchip"></i>
+                <p>Run Classical AI Perception to inspect extracted facts and production rules.</p>
+              </div>
+
+              <div id="analysis-content" class="analysis-grid hidden">
+                <!-- Extracted Facts Card -->
+                <div class="fact-box">
+                  <h4><i class="fa-solid fa-tags"></i> Extracted Symbolic Facts</h4>
+                  <div class="fact-pills">
+                    <div class="fact-pill"><span class="lbl">Color:</span> <strong id="fact-color" class="val">-</strong></div>
+                    <div class="fact-pill"><span class="lbl">Shape:</span> <strong id="fact-shape" class="val">-</strong></div>
+                    <div class="fact-pill"><span class="lbl">Size:</span> <strong id="fact-size" class="val">-</strong></div>
+                  </div>
+
+                  <h5 class="mt-3"><i class="fa-solid fa-ruler-combined"></i> Low-Level Computer Vision Metrics</h5>
+                  <table class="table-sm">
+                    <tr><th>Vertices (polyDP):</th><td id="metric-vertices">-</td></tr>
+                    <tr><th>Aspect Ratio (w/h):</th><td id="metric-aspect">-</td></tr>
+                    <tr><th>Circularity:</th><td id="metric-circularity">-</td></tr>
+                    <tr><th>Mean HSV:</th><td id="metric-hsv">-</td></tr>
+                    <tr><th>Bounding Box:</th><td id="metric-bbox">-</td></tr>
+                  </table>
+                </div>
+
+                <!-- Production Rule Decision Card -->
+                <div class="reasoning-box">
+                  <h4><i class="fa-solid fa-gears"></i> Production Rule Decision</h4>
+                  <div id="decision-banner" class="decision-banner banner-unknown">
+                    <div class="decision-status" id="decision-status">UNKNOWN OBJECT</div>
+                    <div class="decision-name" id="decision-name">Unknown</div>
+                    <div class="confidence-bar-wrap">
+                      <span>Match Score / Confidence:</span>
+                      <div class="confidence-bar"><div id="confidence-fill" class="fill" style="width: 0%;"></div></div>
+                      <span id="confidence-text">0%</span>
+                    </div>
+                  </div>
+
+                  <div class="explanation-box mt-3">
+                    <label><i class="fa-solid fa-comment-dots"></i> Explanation Trace:</label>
+                    <p id="explanation-text" class="explanation-p">-</p>
+                  </div>
+
+                  <div class="mt-3">
+                    <button id="btn-acquire-knowledge" class="btn btn-secondary btn-sm">
+                      <i class="fa-solid fa-plus-circle"></i> Register to Knowledge Base
+                    </button>
+                  </div>
+                </div>
+
+              </div> <!-- End Analysis Grid -->
+
+              <!-- Similarity Score Matrix Table -->
+              <div id="matrix-section" class="mt-3 hidden">
+                <h4><i class="fa-solid fa-table"></i> Similarity Score Matrix Against Knowledge Base</h4>
+                <div class="table-responsive">
+                  <table class="table table-striped" id="matrix-table">
+                    <thead>
+                      <tr>
+                        <th>Knowledge Base Rule</th>
+                        <th>Color Match</th>
+                        <th>Shape Match</th>
+                        <th>Size Match</th>
+                        <th>Weighted Score</th>
+                        <th>Rule Match</th>
+                      </tr>
+                    </thead>
+                    <tbody id="matrix-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div> <!-- End Reasoning Card -->
+
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: BATCH PROCESSING -->
+      <section id="tab-batch" class="tab-page hidden">
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-folder-tree"></i> Batch Folder Processing & Evaluation</h3>
+            <button id="btn-run-batch" class="btn btn-primary"><i class="fa-solid fa-play"></i> Execute Batch Inference</button>
+          </div>
+
+          <div class="batch-controls">
+            <label>Select Target Dataset Folder:</label>
+            <div class="dataset-radio-group">
+              <label class="radio-card active">
+                <input type="radio" name="batch-ds" value="synthetic" checked>
+                <strong>Synthetic Dataset</strong>
+                <span>12 Standard Shapes</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="batch-ds" value="acquisition">
+                <strong>Knowledge Acquisition Dataset</strong>
+                <span>36 Varied Objects</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="batch-ds" value="unknown">
+                <strong>Unknown Object Dataset</strong>
+                <span>10 Novel Test Cases</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- KPI Summary Grid -->
+          <div id="batch-kpis" class="kpi-grid mt-4 hidden">
+            <div class="kpi-card">
+              <span class="title">Total Images</span>
+              <span class="value" id="kpi-total-img">0</span>
+            </div>
+            <div class="kpi-card">
+              <span class="title">Total Objects</span>
+              <span class="value" id="kpi-total-obj">0</span>
+            </div>
+            <div class="kpi-card kpi-success">
+              <span class="title">Recognized Objects</span>
+              <span class="value" id="kpi-recognized">0</span>
+            </div>
+            <div class="kpi-card kpi-warning">
+              <span class="title">Unknown Objects</span>
+              <span class="value" id="kpi-unknown">0</span>
+            </div>
+            <div class="kpi-card kpi-info">
+              <span class="title">Recognition Accuracy</span>
+              <span class="value" id="kpi-accuracy">0%</span>
+            </div>
+          </div>
+
+          <!-- Batch Results Table -->
+          <div class="mt-4">
+            <div class="flex-between">
+              <h4>Batch Recognition Results</h4>
+              <button id="btn-export-csv" class="btn btn-outline btn-sm hidden"><i class="fa-solid fa-file-csv"></i> Download CSV Summary</button>
+            </div>
+            <div class="table-responsive mt-2">
+              <table class="table table-hover" id="batch-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Filename</th>
+                    <th>Observed Color</th>
+                    <th>Observed Shape</th>
+                    <th>Observed Size</th>
+                    <th>Recognized Object</th>
+                    <th>Status</th>
+                    <th>Matched Rule</th>
+                    <th>Confidence</th>
+                  </tr>
+                </thead>
+                <tbody id="batch-tbody">
+                  <tr><td colspan="9" class="text-center">Select a dataset and click "Execute Batch Inference".</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 3: KNOWLEDGE BASE MANAGER -->
+      <section id="tab-knowledge" class="tab-page hidden">
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-database"></i> Knowledge Base & Production Rule Management</h3>
+            <div>
+              <button id="btn-open-add-modal" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add New Rule</button>
+              <button id="btn-reset-kb" class="btn btn-danger"><i class="fa-solid fa-rotate-left"></i> Reset Defaults</button>
+            </div>
+          </div>
+
+          <div class="table-responsive mt-3">
+            <table class="table table-hover" id="kb-table">
+              <thead>
+                <tr>
+                  <th>Object Name</th>
+                  <th>Color Condition</th>
+                  <th>Shape Condition</th>
+                  <th>Size Condition</th>
+                  <th>Production Rule</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="kb-tbody">
+                <tr><td colspan="6" class="text-center">Loading Knowledge Base...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: SYNTHETIC STUDIO -->
+      <section id="tab-synthetic" class="tab-page hidden">
+        <div class="grid-layout">
+          <div class="card control-card">
+            <h3><i class="fa-solid fa-paintbrush"></i> Shape Generator Studio</h3>
+            <p class="text-muted">Generate synthetic shapes on demand to test classical AI recognition in real time.</p>
+
+            <div class="control-group mt-3">
+              <label>Shape Geometry:</label>
+              <select id="synth-shape" class="form-select">
+                <option value="circle">Circle (High Circularity, Vertices > 6)</option>
+                <option value="square">Square (4 Vertices, Aspect Ratio ~ 1.0)</option>
+                <option value="rectangle">Rectangle (4 Vertices, Aspect Ratio != 1.0)</option>
+                <option value="triangle">Triangle (3 Vertices)</option>
+                <option value="hexagon">Hexagon (6 Vertices)</option>
+              </select>
+
+              <label class="mt-2">Color Appearance (HSV):</label>
+              <select id="synth-color" class="form-select">
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+                <option value="yellow">Yellow</option>
+                <option value="orange">Orange</option>
+                <option value="purple">Purple</option>
+                <option value="cyan">Cyan</option>
+                <option value="pink">Pink</option>
+                <option value="white">White</option>
+                <option value="black">Black</option>
+                <option value="gray">Gray</option>
+              </select>
+
+              <label class="mt-2">Object Size Scale:</label>
+              <select id="synth-size" class="form-select">
+                <option value="tiny">Tiny (Extent &lt;= 0.13)</option>
+                <option value="small">Small (Extent &lt;= 0.25)</option>
+                <option value="medium" selected>Medium (Extent &lt;= 0.34)</option>
+                <option value="large">Large (Extent &gt; 0.34)</option>
+              </select>
+            </div>
+
+            <button id="btn-generate-synth" class="btn btn-primary full-width mt-4">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Generate & Analyze Shape
+            </button>
+          </div>
+
+          <div class="results-container">
+            <div class="card">
+              <h3><i class="fa-solid fa-square-poll-vertical"></i> Instant Recognition Result</h3>
+              <div id="synth-result-box" class="synth-result-container mt-3">
+                <div class="text-center p-4">
+                  <i class="fa-solid fa-wand-magic-sparkles fa-3x text-muted mb-2"></i>
+                  <p>Select shape properties and click "Generate & Analyze Shape".</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: WEBCAM STREAM -->
+      <section id="tab-webcam" class="tab-page hidden">
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-camera"></i> Real-Time Live Webcam Perception</h3>
+            <button id="btn-toggle-cam" class="btn btn-primary"><i class="fa-solid fa-power-off"></i> Start Camera</button>
+          </div>
+
+          <div class="webcam-grid mt-3">
+            <div class="video-box">
+              <video id="webcam-video" autoplay playsinline class="video-feed"></video>
+              <canvas id="webcam-canvas" class="hidden"></canvas>
+              <button id="btn-snap-cam" class="btn btn-secondary full-width mt-2" disabled>
+                <i class="fa-solid fa-camera-retro"></i> Capture & Analyze Frame
+              </button>
+            </div>
+
+            <div class="cam-results-box" id="cam-results">
+              <h4>Live Analysis Output</h4>
+              <p class="text-muted">Start webcam and click "Capture & Analyze Frame".</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ADD RULE MODAL -->
+  <div id="rule-modal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-plus-circle"></i> Register Production Rule</h3>
+        <button id="btn-close-modal" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Object Name / Label:</label>
+          <input type="text" id="modal-rule-name" class="form-control" placeholder="e.g. Cyan Hexagon">
+        </div>
+        <div class="form-group mt-2">
+          <label>Color Condition:</label>
+          <select id="modal-rule-color" class="form-select">
+            <option value="red">red</option>
+            <option value="blue">blue</option>
+            <option value="green">green</option>
+            <option value="yellow">yellow</option>
+            <option value="orange">orange</option>
+            <option value="purple">purple</option>
+            <option value="cyan">cyan</option>
+            <option value="pink">pink</option>
+            <option value="white">white</option>
+            <option value="black">black</option>
+            <option value="gray">gray</option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label>Shape Condition:</label>
+          <select id="modal-rule-shape" class="form-select">
+            <option value="circle">circle</option>
+            <option value="square">square</option>
+            <option value="rectangle">rectangle</option>
+            <option value="triangle">triangle</option>
+            <option value="hexagon">hexagon</option>
+            <option value="oval">oval</option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label>Size Condition:</label>
+          <select id="modal-rule-size" class="form-select">
+            <option value="tiny">tiny</option>
+            <option value="small">small</option>
+            <option value="medium">medium</option>
+            <option value="large">large</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer mt-4">
+        <button id="btn-save-rule" class="btn btn-primary"><i class="fa-solid fa-save"></i> Save Rule</button>
+        <button id="btn-cancel-rule" class="btn btn-outline">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

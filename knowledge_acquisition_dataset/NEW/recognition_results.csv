@@ -1,0 +1,2 @@
+file,color,shape,size,label,mode,confidence,contours
+blue_triangle_large.png,blue,triangle,large,Green Triangle,partial,0.69,1
